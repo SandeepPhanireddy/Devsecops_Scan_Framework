@@ -38,6 +38,17 @@ pipeline {
             }
           }
         }
+    stage('Run Security Scans') {
+      parallel {
+        stage('threatmodeling Scan') {
+          steps {
+            script {
+              
+              def sast = load 'threatmodeling_scan.groovy'
+              sast.run()
+            }
+          }
+        }
       }
     }
   }
